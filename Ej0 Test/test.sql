@@ -9,9 +9,22 @@ INSERT: Carga un lote de datos en la base de datos
 UPDATE: Modifica los valores de los campos registrados 
 ELIMINATE: Elimina los registros de manera permanente de la base de datos
 DROP DATABASE IF EXISTS tienda;
+
+PRIMARY KEY: Al asignarle esto a un codigo es para que el mismo no se pueda repetir o usar lo mismo en distintas ocaciones
+EJ: codigo INT UNSIGNED PRIMARY KEY
+    INSERT INTO fabricante VALUES(1, 'Asus'); Vamos a poder crear un valor que se llame 1 Asus y se va a registrar
+	INSERT INTO fabricante VALUES(1, 'Samsung'); Este ya no se va a registrar que el numero 1 ya se encuentra registrado
+    
+FOREING KAY: Sirve para conectar tablas entre si
+EJ: codigo INT UNSIGNED PRIMARY KEY
+    nombre VARCHAR(100) NOT NULL
+    precio DOUBLE NOT NULL
+    codigo_fabricante INT UNSIGNED NOT NULL, FOREING KEY (codigo_fabricante) REFERENCES fabricante(codigo) 
+    
+*/
 CREATE DATABASE tienda CHARACTER SET utf8mb4;
 USE tienda;
-*/
+
 CREATE DATABASE tienda;
 USE tienda;
 CREATE TABLE fabricante (
@@ -23,8 +36,7 @@ CREATE TABLE producto (
   codigo INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   nombre VARCHAR(100) NOT NULL,
   precio DOUBLE NOT NULL,
-  codigo_fabricante INT UNSIGNED NOT NULL,
-  FOREIGN KEY (codigo_fabricante) REFERENCES fabricante(codigo)
+  codigo_fabricante INT UNSIGNED NOT NULL, FOREIGN KEY (codigo_fabricante) REFERENCES fabricante(codigo)
 );
 SELECT * FROM fabricante;
 SELECT * FROM fabricante WHERE codigo = 10;
